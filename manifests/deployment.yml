@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8stest-deployment
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: k8stest
+  template:
+    metadata:
+      labels:
+        app: k8stest
+    spec:
+      containers:
+      - name: web
+        image: wittness/k8stestweb
+        ports:
+          - containerPort: 80
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      - name: api
+        image: wittness/k8stestapi
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
